@@ -5,3 +5,4 @@ rules:
     - ANSIBLE0012
     - ANSIBLE0009
     - ANSIBLE0007
+    - ANSIBLE0020
