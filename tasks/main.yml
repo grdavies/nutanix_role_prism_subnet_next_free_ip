@@ -64,7 +64,7 @@
 
 - name: Get first available IP address
   ansible.builtin.set_fact:
-    nutanix_next_ip_available_ip: "{{ nutanix_next_ip_available_address_list | first }}"
+    nutanix_subnet_ipam_next_available_ip: "{{ nutanix_next_ip_available_address_list | first }}"
 
 - name: Debug
   block:
@@ -111,27 +111,27 @@
     - nutanix_debug
 
 - name: Perform basic ping test on IP address "{{ nutanix_next_ip_subnet_name }}"
-  shell: "ping -c 2 {{ nutanix_next_ip_available_ip }}"
-  register: nutanix_next_ip_available_ip_ping
+  shell: "ping -c 2 {{ nutanix_subnet_ipam_next_available_ip }}"
+  register: nutanix_subnet_ipam_next_available_ip_ping
   ignore_errors: yes
   changed_when: false
   check_mode: false
-  failed_when: nutanix_next_ip_available_ip_ping.rc == 1 or nutanix_next_ip_available_ip_ping.rc > 2
+  failed_when: nutanix_subnet_ipam_next_available_ip_ping.rc == 1 or nutanix_subnet_ipam_next_available_ip_ping.rc > 2
   when:
     - nutanix_next_ip_ping_test
 
 - name: ICMP test failure
   ansible.builtin.fail:
-    msg: "ICMP test indicates that {{ nutanix_next_ip_available_ip }} is in use. Please investigate and try again."
+    msg: "ICMP test indicates that {{ nutanix_subnet_ipam_next_available_ip }} is in use. Please investigate and try again."
   when:
     - nutanix_next_ip_ping_test
-    - nutanix_next_ip_available_ip_ping.rc == 1 or nutanix_next_ip_available_ip_ping.rc > 2
+    - nutanix_subnet_ipam_next_available_ip_ping.rc == 1 or nutanix_subnet_ipam_next_available_ip_ping.rc > 2
 
 - name: ICMP test warning
   ansible.builtin.debug:
-    msg: "WARNING: No ping test performed to attempt to verify whether IP address '{{ nutanix_next_ip_available_ip }}' is in use."
+    msg: "WARNING: No ping test performed to attempt to verify whether IP address '{{ nutanix_subnet_ipam_next_available_ip }}' is in use."
   when: not nutanix_next_ip_ping_test
 
 - name: Next available IP address within subnet "{{ nutanix_next_ip_subnet_name }}"
   ansible.builtin.debug:
-    var: nutanix_next_ip_available_ip
+    var: nutanix_subnet_ipam_next_available_ip
