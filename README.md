@@ -19,6 +19,13 @@ The following collection need to be installed as they are used within this role;
 | nutanix_next_ip_subnet_name                 | yes      |                 |                                                                                 | The name of the AHV IPAM enabled subnet upon which to search for an available IP address                                                                                                                                          |
 | nutanix_next_ip_ping_test                   | no       | no              | yes | no                                                                        | Whether to perform an ICMP test of the IP returned by AHV IP to verify that it is available.                                                                                                                                      |
 
+### Returned Variables
+
+| Variable                                    | Comments                                                                                                                                                                                                                          |
+|---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| nutanix_next_ip_available_ip                | The next unallocated IP address from the AVH IPAM pool.                                                                                                                                                                           |
+
+
 ## Example Playbook
 
 ```
