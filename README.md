@@ -23,7 +23,7 @@ The following collection need to be installed as they are used within this role;
 
 | Variable                                    | Comments                                                                                                                                                                                                                          |
 |---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| nutanix_next_ip_available_ip                | The next unallocated IP address from the AVH IPAM pool.                                                                                                                                                                           |
+| nutanix_subnet_ipam_next_available_ip       | The next unallocated IP address from the AVH IPAM pool.                                                                                                                                                                           |
 
 
 ## Example Playbook
